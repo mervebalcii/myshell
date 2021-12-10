@@ -7,11 +7,30 @@
 #include<unistd.h> 
 #include<sys/types.h> 
 #include<sys/wait.h> 
+#include <stdbool.h>
 
+int IsPipe(char *commands[]){
+   
+    int i;
+    for (i = 0; i < 50; i++){
+        if (strcmp(commands[i],"|")==0){
+          printf("a");
+            return 0;
+          
+           
+    }else{
+    
+    printf("b");
+    return 1;
+    }
+    }
+    return 0;
+}
 
 int main(){
 char *dizi[100];
 char *tekrar[2];
+
  
 
 while (1) 
@@ -31,16 +50,17 @@ while (1)
 	 
 	}
 	if(count > 4){
-	printf("hatali komut sayisi");
-	} else{
-	
-	
-	
-	
+	    if(IsPipe(dizi)==0){
+	     printf("| var");
 	
 	}
+	else if(IsPipe(dizi)==1){
+	  printf("hatali");
+	}
+	}else{
+	printf("normal");
 	
-	  
+	} 
 	} 
   return 0; 
 }
