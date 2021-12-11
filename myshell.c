@@ -1,4 +1,3 @@
-
 #include<readline/readline.h> 
 #include<readline/history.h> 
 #include<stdio.h> 
@@ -8,10 +7,22 @@
 #include<sys/types.h> 
 #include<sys/wait.h> 
 #include <stdbool.h>
+
+
+
 void command(char *input,char *inp[]){
+
 if(strcmp(inp[0],"tekrar")==0){
-  		printf("tekrar baslıyor...\n");
-  		
+  if (inp[1] == NULL && inp[2] == NULL)
+    {
+      printf("Eksik ya da hatalı komut girdiniz.\n");
+    }
+    else if (inp[1] == NULL || inp[2] == NULL)
+    {
+      printf("Eksik ya da hatalı komut girdiniz.\n");
+    } else{
+
+  		printf("tekrar baslıyor...\n");		
   		int e,f;
   		f = fork(); 
             		if(f == 0){ 
@@ -23,7 +34,19 @@ if(strcmp(inp[0],"tekrar")==0){
             }	
   		
   	}
-  	if(strcmp(inp[0],"islem")==0){
+  	}
+  	
+    
+    if(strcmp(inp[0],"islem")==0){
+  	if (inp[1] == NULL && inp[2] == NULL && inp[3] == NULL)
+    {
+      printf("Eksik ya da hatalı komut girdiniz.\n");
+    }
+    else if (inp[1] == NULL || inp[2] == NULL || inp[3] == NULL)
+    {
+      printf("Eksik ya da hatalı komut girdiniz.\n");
+    } else{
+
   	int f,e;
   	printf("islem baslıyor...\n");
   	
@@ -37,12 +60,15 @@ if(strcmp(inp[0],"tekrar")==0){
                 wait(&e); 
             }
   	
-  	
+  	}
   	
   	}
   	
   	
   	}
+  	
+  	
+  	
 int IsPipe(char **commands){
 int result=0;
     int i;
@@ -53,7 +79,6 @@ int result=0;
             return result=0;
           
      }
-        
       
   }
     printf("yok\n");
@@ -62,12 +87,13 @@ int result=0;
 
 
 
+
 int main(){
 char* ilk_girdi;
 char **dizi=((char **) malloc (100*sizeof(char**)));
 char *tekrar[2];
 
- 
+char *piped_commands[90];
 
 while (1) 
 	{          
@@ -102,6 +128,8 @@ while (1)
 	
 		
 	   if (IsPipe(dizi)==0){
+	
+	//     execArgsPiped(dizi, piped_commands);
             printf("buldu\n");
            
       
@@ -119,19 +147,22 @@ while (1)
 	
 	}
 	
-	   if(strcmp(girdi,"bash")==0){
+	   else if(strcmp(girdi,"bash")==0){
 	 printf("Bash baslıyor...\n");
          system("/bin/bash");
 	
 	
 	
 	}
-	 if(strcmp(girdi,"clear")==0){	
+	 else if(strcmp(girdi,"clear")==0){	
          system("clear");
 	
 	}
-	if(strcmp(girdi,"ls")==0){	
+	else if(strcmp(girdi,"ls")==0){	
          system("/bin/ls");
+	
+	} else if ( (strcmp(girdi,"islem")!=0) && (strcmp(girdi,"tekrar")!=0 ) )    {  
+	  printf("yanlis bir komut girdiniz, tekrar deneyiniz\n");
 	
 	}
 	
