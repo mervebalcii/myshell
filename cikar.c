@@ -3,9 +3,9 @@
 
 int main(int argc, char *argv[])
 {
-    int num1 = atoi(argv[0]);
-    int num2 = atoi(argv[1]);
-    int total = num1-num2;
-    printf("%d - %d = %d \n",num1,num2,total);
+    int number1 = atoi(argv[0]);
+    int number2 = atoi(argv[1]);
+    int sum = number1-number2;
+    printf("%d - %d = %d \n",number1,number2,sum);
     return 0;
 }
